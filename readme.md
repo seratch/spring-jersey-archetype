@@ -35,3 +35,8 @@ Y: y
 [INFO] ------------------------------------------------------------------------
 ```
 
+````sh
+cd spring-jersey-example
+mvn jetty:run
+curl http://localhost:8080/
+```
