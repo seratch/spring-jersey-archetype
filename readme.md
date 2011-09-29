@@ -10,6 +10,7 @@
 
 ````sh
 mvn archetype:generate -DarchetypeCatalog=http://seratch.github.com/mvn-repo/releases
+```
 
 ```sh
 Choose archetype:
