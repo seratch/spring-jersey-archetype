@@ -1,4 +1,4 @@
-﻿package example.database;
+package example.database;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

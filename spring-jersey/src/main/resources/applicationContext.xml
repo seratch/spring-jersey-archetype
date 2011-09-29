@@ -1,4 +1,4 @@
-﻿<beans xmlns="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
@@ -16,7 +16,6 @@
 
     <context:annotation-config/>
 
-    <!-- TODO Please edit here to suite your project -->
     <context:component-scan base-package="example.database"/>
     <context:component-scan base-package="example.resource"/>
 
@@ -32,5 +31,20 @@
         <property name="username" value=""/>
         <property name="password" value=""/>
     </bean>
+
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="txPointcut" expression="execution(* *.resource..*Resource.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+    </aop:config>
 
 </beans>

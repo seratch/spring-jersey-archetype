@@ -1,4 +1,4 @@
-﻿package example.view;
+package example.view;
 
 import example.database.Member;
 

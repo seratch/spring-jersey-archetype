@@ -1,4 +1,4 @@
-﻿package example.resource;
+package example.resource;
 
 import com.sun.jersey.api.view.Viewable;
 import example.database.Member;

@@ -1,4 +1,4 @@
-﻿package example.database;
+package example.database;
 
 import org.springframework.stereotype.Component;
 
