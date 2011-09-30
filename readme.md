@@ -2,9 +2,13 @@
 
 ## spring-jersey-archetype
 
-* Jersey Server 1.7-ea01, 1.8, 1.9
+### Jersey Server (1.7-ea01, 1.8, 1.9)
 
-* Spring Framework 3.0.6.RELEASE
+[http://jersey.java.net/nonav/documentation/1.9/user-guide.html](http://jersey.java.net/nonav/documentation/1.9/user-guide.html)
+
+### Spring Framework (3.0.6.RELEASE)
+
+[http://static.springsource.org/spring/docs/3.0.6.RELEASE/spring-framework-reference/html/](http://static.springsource.org/spring/docs/3.0.6.RELEASE/spring-framework-reference/html/)
 
 ## How to use
 
