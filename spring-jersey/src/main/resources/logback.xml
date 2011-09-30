@@ -9,7 +9,6 @@
         </layout>
     </appender>
 
-    <!-- TODO Please edit here to suite your project -->
     <logger name="example">
         <level value="info"/>
     </logger>
