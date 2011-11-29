@@ -2,9 +2,9 @@
 
 ## spring-jersey-archetype
 
-### Jersey Server (1.7-ea01, 1.8, 1.9)
+### Jersey Server (1.10)
 
-[http://jersey.java.net/nonav/documentation/1.9/user-guide.html](http://jersey.java.net/nonav/documentation/1.9/user-guide.html)
+[http://jersey.java.net/nonav/documentation/1.10/user-guide.html](http://jersey.java.net/nonav/documentation/1.10/user-guide.html)
 
 ### Spring Framework (3.0.6.RELEASE)
 
@@ -18,13 +18,11 @@ mvn archetype:generate -DarchetypeCatalog=http://seratch.github.com/mvn-repo/rel
 
 ```sh
 Choose archetype:
-1: http://seratch.github.com/mvn-repo/releases -> spring-jersey-archetype (Jersey project template with Spring)
+1: http://seratch.github.com/mvn-repo/releases -> spring-jersey-archetype (Jersey App Template with Spring Framework)
 Choose a number: : 1
 Choose version:
-1: 1.7-ea01
-2: 1.8
-3: 1.9
-Choose a number: 3:
+1: 1.10
+Choose a number: 1:
 Define value for property 'groupId': : com.example
 Define value for property 'artifactId': : spring-jersey-example
 Define value for property 'version': 1.0-SNAPSHOT:
@@ -49,3 +47,4 @@ cd spring-jersey-example
 mvn jetty:run
 curl http://localhost:8080/
 ```
+
