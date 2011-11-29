@@ -9,9 +9,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import org.springframework.stereotype.Component;
+import javax.annotation.Resource;
 
 public class MemberTest extends BasicSpringTestCase {
 
+	@Resource 
 	Member member;
 
 	@Test
