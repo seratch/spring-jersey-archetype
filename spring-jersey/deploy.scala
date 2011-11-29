@@ -29,5 +29,5 @@ lines foreach { out.println }
 out.close()
 
 ("rm -f pom.xml_bk" !)
-("mvn -DaltDeploymentRepository=release-repo::default::file:${HOME}/github/seratch.github.com/mvn-repo/releases clean deploy -f target/generated-sources/archetype/pom.xml" !)
+("mvn -DaltDeploymentRepository=release-repo::default::file:" + args(0) + "/github/seratch.github.com/mvn-repo/releases clean deploy -f target/generated-sources/archetype/pom.xml" !)
 
