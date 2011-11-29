@@ -1,4 +1,4 @@
-# Jersey(JAX-RS) application template with Spring Framework
+# Jersey(JAX-RS) Application Template with Spring Framework
 
 ## spring-jersey-archetype
 
@@ -18,7 +18,7 @@ mvn archetype:generate -DarchetypeCatalog=http://seratch.github.com/mvn-repo/rel
 
 ```sh
 Choose archetype:
-1: http://seratch.github.com/mvn-repo/releases -> spring-jersey-archetype (Jersey App Template with Spring Framework)
+1: http://seratch.github.com/mvn-repo/releases -> com.github.seratch:spring-jersey-archetype (Jersey App Template with Spring Framework)
 Choose a number: : 1
 Choose version:
 1: 1.10
