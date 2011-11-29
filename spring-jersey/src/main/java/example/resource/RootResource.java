@@ -4,8 +4,12 @@ import com.sun.jersey.api.view.Viewable;
 import example.database.Member;
 import example.database.MemberDao;
 import example.view.MembersViewModel;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -14,9 +18,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+
+import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 @Component
 @Path("/")
@@ -32,7 +41,7 @@ public class RootResource {
 
 	@GET
 	@Path("/")
-	public Object index() {
+	public String index() {
 		log.info("index called!");
 		return "Hello, JAX-RS(Jersey) with Spring!";
 	}
@@ -67,13 +76,41 @@ public class RootResource {
 		return Response.ok(new Viewable("/post/input.jsp")).build();
 	}
 
+	@Resource
+	Validator validator;
+
 	@POST
 	@Path("/post/submit")
 	public Object postSubmit(@FormParam("id") String id,
-			@FormParam("password") String password) {
+	                         @FormParam("password") String password) {
+
 		log.info("@FormParam(\"id\"): " + id);
 		log.info("@FormParam(\"password\"): " + password);
+
+		// validation
+		PostSubmitParams params = new PostSubmitParams(id, password);
+		Set<ConstraintViolation<PostSubmitParams>> violations = validator.validate(params);
+		if (!violations.isEmpty()) {
+			log.debug("Validation failed : " + violations.size());
+			for (ConstraintViolation<PostSubmitParams> v : violations) {
+				log.debug(v.getPropertyPath().toString() + " " + v.getMessage());
+			}
+			return Response.status(Response.Status.BAD_REQUEST).build();
+		}
+
 		return "Posted: id=" + id + ",password=" + password;
+
+	}
+
+	public static class PostSubmitParams {
+		public PostSubmitParams(String id, String password) {
+			this.id = id;
+			this.password = password;
+		}
+		@NotEmpty
+		public String id;
+		@NotEmpty
+		public String password;
 	}
 
 }

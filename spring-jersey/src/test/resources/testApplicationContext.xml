@@ -19,6 +19,10 @@
     <context:component-scan base-package="example.database"/>
     <context:component-scan base-package="example.resource"/>
 
+    <!-- http://static.springsource.org/spring/docs/current/spring-framework-reference/html/aop.html#aop-proxying -->
+    <aop:config proxy-target-class="true">
+    </aop:config>
+
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
 
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
@@ -37,16 +41,5 @@
     <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
-
-    <tx:advice id="txAdvice" transaction-manager="txManager">
-        <tx:attributes>
-            <tx:method name="*"/>
-        </tx:attributes>
-    </tx:advice>
-
-    <aop:config>
-        <aop:pointcut id="txPointcut" expression="execution(* *.resource..*Resource.*(..))"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
-    </aop:config>
 
 </beans>

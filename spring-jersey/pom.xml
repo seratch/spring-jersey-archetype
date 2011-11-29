@@ -6,17 +6,17 @@
     <artifactId>spring-jersey</artifactId>
     <version>${jersey.version}</version>
     <name>${project.artifactId}</name>
-    <description>Jersey app template with Spring Framework</description>
+    <description>Jersey App Template with Spring Framework</description>
     <packaging>war</packaging>
     <inceptionYear>2011</inceptionYear>
 
     <properties>
-        <maven.compiler.source>1.5</maven.compiler.source>
-        <maven.compiler.target>1.5</maven.compiler.target>
+        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.6</maven.compiler.target>
         <encoding>UTF-8</encoding>
         <spring.version>3.0.6.RELEASE</spring.version>
-        <jersey.version>1.9</jersey.version>
-        <slf4j.version>1.6.1</slf4j.version>
+        <jersey.version>1.10</jersey.version>
+        <slf4j.version>1.6.4</slf4j.version>
     </properties>
 
     <!--
@@ -68,20 +68,42 @@
             <version>2.2</version>
         </dependency>
 
-        <!-- SLF4J -->
+        <!-- Bean Validation (JSR 303) -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.0.0.GA</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.0.2.GA</version>
+        </dependency>
+
+        <!-- Logging: SLF4J/Logback -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>0.9.30</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-jdk14</artifactId>
+            <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
 
@@ -103,7 +125,6 @@
             <artifactId>commons-dbcp</artifactId>
             <version>1.4</version>
         </dependency>
-        <!-- TODO Please edit here to suite your project -->
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
@@ -147,6 +168,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- This is required when using jsp on Tomcat -->
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+            <version>1.1.2</version>
+        </dependency>
 
         <!-- Geronimo Specs -->
         <dependency>
@@ -178,7 +205,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
-            <version>1.8.2</version>
+            <version>1.8.5</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -192,6 +219,12 @@
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey.jersey-test-framework</groupId>
+            <artifactId>jersey-test-framework-grizzly2</artifactId>
+            <version>${jersey.version}</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
@@ -211,7 +244,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-archetype-plugin</artifactId>
-                <version>2.1</version>
+                <version>2.2</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>jdom</groupId>
+                        <artifactId>jdom</artifactId>
+                        <version>1.1</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>

@@ -2,12 +2,18 @@ package example.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,33 +26,36 @@ public class MemberDao {
 
 	public void setupIfNotYet() {
 		try {
-			this.jdbcTemplate.queryForInt("select count(1) from member");
+			jdbcTemplate.queryForInt("select count(1) from member");
 		} catch (Exception e) {
 			log.info("Create table 'member' and insert some records...");
-			this.jdbcTemplate
-					.execute("create table member (id int primary key, name varchar(100))");
-			this.jdbcTemplate.update("insert into member values(?,?)", 1,
-					"Andy");
-			this.jdbcTemplate.update("insert into member values(?,?)", 2,
-					"Brian");
-			this.jdbcTemplate.update("insert into member values(?,?)", 3,
-					"Charles");
+			jdbcTemplate.execute("create table member (id int primary key, name varchar(100))");
+			jdbcTemplate.update("insert into member values(?,?)", 1, "Andy");
+			jdbcTemplate.update("insert into member values(?,?)", 2, "Brian");
+			jdbcTemplate.update("insert into member values(?,?)", 3, "Charles");
 		}
 	}
 
 	public List<Member> findAll() {
 		setupIfNotYet();
-		return this.jdbcTemplate.query("select * from member",
-				new RowMapper<Member>() {
-					@Override
-					public Member mapRow(ResultSet resultSet, int i)
-							throws SQLException {
-						Member member = new Member();
-						member.setId(resultSet.getInt("id"));
-						member.setName(resultSet.getString("name"));
-						return member;
-					}
-				});
+		return jdbcTemplate.query("select * from member", mapper);
 	}
+
+	RowMapper<Member> mapper = new RowMapper<Member>() {
+		@Override
+		public Member mapRow(ResultSet resultSet, int i) throws SQLException {
+			return extractor.extractData(resultSet);
+		}
+	};
+
+	ResultSetExtractor<Member> extractor = new ResultSetExtractor<Member>() {
+		@Override
+		public Member extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+			Member member = new Member();
+			member.setId(resultSet.getInt("id"));
+			member.setName(resultSet.getString("name"));
+			return member;
+		}
+	};
 
 }

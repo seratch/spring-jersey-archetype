@@ -1,52 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://java.sun.com/xml/ns/javaee"
          xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee"
          version="2.5">
 
-    <!-- static files -->
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.html</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.jpg</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.png</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.css</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.js</url-pattern>
-    </servlet-mapping>
-
-    <!-- Jersey with Spring -->
-    <servlet>
-        <servlet-name>Jersey with Spring</servlet-name>
-        <!-- <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class> -->
-        <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
-        <init-param>
-            <param-name>com.sun.jersey.config.property.packages</param-name>
-            <!-- TODO Please edit here to suite your project -->
-            <param-value>example</param-value>
-        </init-param>
-        <init-param>
-            <param-name>com.sun.jersey.config.property.JSPTemplatesBasePath</param-name>
-            <param-value>/WEB-INF/jsp</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Jersey with Spring</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>
+    <!-- jul-to-slf4j -->
+    <listener>
+        <listener-class>example.listener.SLF4JBridgeListener</listener-class>
+    </listener>
 
     <!-- Spring context -->
     <context-param>
@@ -59,6 +21,24 @@
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
+
+    <!-- Jersey with Spring -->
+    <filter>
+        <filter-name>Jersey with Spring</filter-name>
+        <filter-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</filter-class>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.JSPTemplatesBasePath</param-name>
+            <param-value>/WEB-INF/jsp</param-value>
+        </init-param>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.WebPageContentRegex</param-name>
+            <param-value>/.+(\.html|\.jpg|\.jpeg|\.png|\.gif|\.js|\.css|\.swf)</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>Jersey with Spring</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <error-page>
         <error-code>400</error-code>

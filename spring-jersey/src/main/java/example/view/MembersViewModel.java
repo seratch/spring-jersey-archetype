@@ -1,6 +1,7 @@
 package example.view;
 
 import example.database.Member;
+
 import java.util.List;
 
 public class MembersViewModel {
