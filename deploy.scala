@@ -33,6 +33,8 @@ lines foreach { out.println }
 out.close()
 
 ("rm -f " + rootDir + "/pom.xml_bk" !)
+("rm -f " + rootDir + "/*.ipr" !)
+("rm -f " + rootDir + "/*.iws" !)
 ("rm -f " + generatedArchetypeDir + "/target/classes/archetype-resources/deploy.scala" !)
 ("mvn -DaltDeploymentRepository=release-repo::default::file:" + homeDir + "/github/seratch.github.com/mvn-repo/releases clean deploy -f " + generatedArchetypeDir + "/pom.xml" !)
 
