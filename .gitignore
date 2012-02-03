@@ -1,4 +1,4 @@
-﻿# use glob syntax.
+# use glob syntax.
 syntax: glob
 *.ser
 *.class

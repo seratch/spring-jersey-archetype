@@ -20,52 +20,53 @@ import static org.junit.Assert.*;
 
 public class RootResourceTest extends JerseyTest {
 
-	Logger log = LoggerFactory.getLogger(this.getClass());
+    Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@Override
-	protected AppDescriptor configure() {
-		return new WebAppDescriptor.Builder("restful.server.resource")
-				.contextParam("contextConfigLocation", "classpath:/applicationContext.xml")
-				.contextPath("/").servletClass(SpringServlet.class)
-				.contextListenerClass(ContextLoaderListener.class)
-				.requestListenerClass(RequestContextListener.class)
-				.build();
-	}
+    @Override
+    protected AppDescriptor configure() {
+        return new WebAppDescriptor.Builder("restful.server.resource")
+                .contextParam("contextConfigLocation", "classpath:/applicationContext.xml")
+                .contextPath("/")
+                .servletClass(SpringServlet.class)
+                .contextListenerClass(ContextLoaderListener.class)
+                .requestListenerClass(RequestContextListener.class)
+                .build();
+    }
 
-	@Test
-	public void index() throws Exception {
-		WebResource webResource = resource();
-		MultivaluedMap<String, String> params = new MultivaluedMapImpl();
-		params.add("q", "Java");
-		String response = webResource.path("/").queryParams(params).get(String.class);
-		assertThat(response, is(equalTo("Hello, JAX-RS(Jersey) with Spring!")));
-	}
+    @Test
+    public void index() throws Exception {
+        WebResource webResource = resource();
+        MultivaluedMap<String, String> params = new MultivaluedMapImpl();
+        params.add("q", "Java");
+        String response = webResource.path("/").queryParams(params).get(String.class);
+        assertThat(response, is(equalTo("Hello, JAX-RS(Jersey) with Spring!")));
+    }
 
-	@Test
-	public void postSubmit() throws Exception {
-		WebResource webResource = resource();
-		MultivaluedMap<String, String> params = new MultivaluedMapImpl();
-		params.add("id", "iii");
-		params.add("password", "ppp");
-		String response1 = webResource.path("/post/submit").post(String.class, params);
-		String response2 = webResource.path("/post/submit/").post(String.class, params);
-		String expected = "Posted: id=iii,password=ppp";
-		assertThat(response1, is(equalTo(expected)));
-		assertThat(response2, is(equalTo(expected)));
-	}
+    @Test
+    public void postSubmit() throws Exception {
+        WebResource webResource = resource();
+        MultivaluedMap<String, String> params = new MultivaluedMapImpl();
+        params.add("id", "iii");
+        params.add("password", "ppp");
+        String response1 = webResource.path("/post/submit").post(String.class, params);
+        String response2 = webResource.path("/post/submit/").post(String.class, params);
+        String expected = "Posted: id=iii,password=ppp";
+        assertThat(response1, is(equalTo(expected)));
+        assertThat(response2, is(equalTo(expected)));
+    }
 
-	@Test(expected = UniformInterfaceException.class)
-	public void postSubmit_ValidationError() throws Exception {
-		WebResource webResource = resource();
-		MultivaluedMap<String, String> params = new MultivaluedMapImpl();
-		params.add("id", "");
-		params.add("password", "ppp");
-		try {
-			webResource.path("/post/submit").post(String.class, params);
-		} catch (UniformInterfaceException e) {
-			log.info(e.getLocalizedMessage());
-			throw e;
-		}
-	}
+    @Test(expected = UniformInterfaceException.class)
+    public void postSubmit_ValidationError() throws Exception {
+        WebResource webResource = resource();
+        MultivaluedMap<String, String> params = new MultivaluedMapImpl();
+        params.add("id", "");
+        params.add("password", "ppp");
+        try {
+            webResource.path("/post/submit").post(String.class, params);
+        } catch (UniformInterfaceException e) {
+            log.info(e.getLocalizedMessage());
+            throw e;
+        }
+    }
 
 }

@@ -12,23 +12,23 @@ import javax.annotation.Resource;
 
 public abstract class RollbackTestCase extends BasicSpringTestCase {
 
-	private Logger log = LoggerFactory.getLogger(this.getClass());
+    private Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@Resource
-	private DataSourceTransactionManager txManager;
+    @Resource
+    private DataSourceTransactionManager txManager;
 
-	@Before
-	public void txSetup() {
-		TransactionStatus tx = txManager.getTransaction(new DefaultTransactionDefinition());
-		tx.setRollbackOnly();
-		log.debug("The transaction is set as rollback only.");
-	}
+    @Before
+    public void txSetup() {
+        TransactionStatus tx = txManager.getTransaction(new DefaultTransactionDefinition());
+        tx.setRollbackOnly();
+        log.debug("The transaction is set as rollback only.");
+    }
 
-	@After
-	public void txRollback() {
-		TransactionStatus tx = txManager.getTransaction(new DefaultTransactionDefinition());
-		txManager.rollback(tx);
-		log.debug("The transaction is rolled back.");
-	}
+    @After
+    public void txRollback() {
+        TransactionStatus tx = txManager.getTransaction(new DefaultTransactionDefinition());
+        txManager.rollback(tx);
+        log.debug("The transaction is rolled back.");
+    }
 
 }
