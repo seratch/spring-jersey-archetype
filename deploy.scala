@@ -3,15 +3,7 @@ import scala.sys.process._
 import scala.io.Source
 import java.io.PrintWriter
 
-args match { 
-  case Array() => {
-    println("homeDir is required")
-    System.exit(1)
-  }
-  case _ =>
-}
-val homeDir = args(0)
-
+val homeDir = System.getProperty("user.home")
 val rootDir = "./spring-jersey"
 val generatedArchetypeDir = rootDir + "/target/generated-sources/archetype"
 
