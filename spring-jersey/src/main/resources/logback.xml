@@ -3,10 +3,10 @@
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <Target>System.out</Target>
-        <Encoding>UTF-8</Encoding>
-        <layout class="ch.qos.logback.classic.PatternLayout">
+        <encoder>
             <Pattern>%d{yyyy-MM-dd HH:mm:ss} [%level] %logger{36} - %msg%n</Pattern>
-        </layout>
+            <charset>UTF-8</charset>
+        </encoder>
     </appender>
 
     <logger name="example">
