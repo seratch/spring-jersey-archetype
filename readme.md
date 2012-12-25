@@ -2,13 +2,13 @@
 
 ## spring-jersey-archetype
 
-### Jersey Server (1.11)
+### Jersey Server (1.16)
 
-[http://jersey.java.net/nonav/documentation/1.11/user-guide.html](http://jersey.java.net/nonav/documentation/1.11/user-guide.html)
+[http://jersey.java.net/nonav/documentation/1.16/user-guide.html](http://jersey.java.net/nonav/documentation/1.16/user-guide.html)
 
-### Spring Framework (3.0.7.RELEASE)
+### Spring Framework (3.1.3.RELEASE)
 
-[http://static.springsource.org/spring/docs/3.0.7.RELEASE/spring-framework-reference/html/](http://static.springsource.org/spring/docs/3.0.7.RELEASE/spring-framework-reference/html/)
+[http://static.springsource.org/spring/docs/3.1.3.RELEASE/spring-framework-reference/html/](http://static.springsource.org/spring/docs/3.1.3.RELEASE/spring-framework-reference/html/)
 
 ## How to use
 
@@ -23,7 +23,8 @@ Choose a number: : 1
 Choose version:
 1: 1.10
 2: 1.11
-Choose a number: 2:
+2: 1.16
+Choose a number: 3:
 Define value for property 'groupId': : com.example
 Define value for property 'artifactId': : spring-jersey-example
 Define value for property 'version': 1.0-SNAPSHOT:
