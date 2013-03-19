@@ -2,13 +2,13 @@
 
 ## spring-jersey-archetype
 
-### Jersey Server (1.16)
+### Jersey Server (1.17.1)
 
-[http://jersey.java.net/nonav/documentation/1.16/user-guide.html](http://jersey.java.net/nonav/documentation/1.16/user-guide.html)
+[http://jersey.java.net/nonav/documentation/1.17/user-guide.html](http://jersey.java.net/nonav/documentation/1.17/user-guide.html)
 
-### Spring Framework (3.1.3.RELEASE)
+### Spring Framework (3.2.2.RELEASE)
 
-[http://static.springsource.org/spring/docs/3.1.3.RELEASE/spring-framework-reference/html/](http://static.springsource.org/spring/docs/3.1.3.RELEASE/spring-framework-reference/html/)
+[http://static.springsource.org/spring/docs/3.2.2.RELEASE/spring-framework-reference/html/](http://static.springsource.org/spring/docs/3.2.2.RELEASE/spring-framework-reference/html/)
 
 ## How to use
 
@@ -19,11 +19,12 @@ mvn archetype:generate -DarchetypeCatalog=http://seratch.github.com/mvn-repo/rel
 ```sh
 Choose archetype:
 1: http://seratch.github.com/mvn-repo/releases -> spring-jersey-archetype (Jersey App Template with Spring Framework)
-Choose a number: : 1
+Choose a number: : 4
 Choose version:
 1: 1.10
 2: 1.11
-2: 1.16
+3: 1.16
+4: 1.17.1
 Choose a number: 3:
 Define value for property 'groupId': : com.example
 Define value for property 'artifactId': : spring-jersey-example
